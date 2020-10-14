@@ -108,7 +108,9 @@ sqoop export \
 9.
 
 ```sql
-
+create table solution 
+select concat('A', id) as id, fname, lname, address, city, state, zip, birthday from customer;
+select * from solution;
 ```
 
 ![](image/part2/9.png)
