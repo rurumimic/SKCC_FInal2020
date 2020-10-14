@@ -240,3 +240,51 @@ n[1-5].ex.com
 ```
 
 ![](image/part1/1.c.1.png)
+
+
+2. Mysql
+
+```bash
+mysql -u root -p # training
+```
+
+```sql
+CREATE DATABASE test
+use test
+
+source ./authors.sql
+source ./posts.sql
+
+GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
+FLUSH PRIVILEGES;
+```
+
+3. extract tables authors and posts
+
+```bash
+sqoop import \
+--connect jdbc:mysql://localhost/test \
+--username training \
+--password training \
+--table authors \
+--fields-terminated-by '\t' \
+--target-dir /user/training/authors
+
+sqoop import \
+--connect jdbc:mysql://localhost/test \
+--username training \
+--password training \
+--table posts \
+--fields-terminated-by '\t' \
+--target-dir /user/training/posts
+```
+
+```sql
+CREATE EXTERNAL TABLE authors (id int, first_name string, last_name string, email string, birthdate date, added timestamp)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+LOCATION '/user/training/authors/'
+
+CREATE TABLE posts (id int, author_id int, title string, description string, content string, date date)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+LOCATION '/user/training/authors/'
+```
