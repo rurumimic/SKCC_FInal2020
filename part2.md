@@ -59,6 +59,8 @@ SELECT id, initcap(fname) as fname, initcap(lname), address, city, state, zip fr
 
 ![](image/part2/4.png)
 
+_**Instructor Comment: Should be Customer ID not id.  Did not unify the zipcode**_
+
 5번
 
 ```sql
