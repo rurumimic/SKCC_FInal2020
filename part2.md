@@ -71,6 +71,8 @@ select fname, lname, city, state from customer where city='Palo Alto' and state=
 
 ![](image/part2/5.png)
 
+_**Instructor Comment: The output should be a single field delimited with tabs**_
+
 6.
 
 ```sql
